@@ -61,12 +61,10 @@ kotet(X,kotetek(_,_,X,_,_)).
 kotet(X,kotetek(_,_,_,X,_)).
 kotet(X,kotetek(_,_,_,_,X)).
 
-% Nemek
 ferfi(dalos_dezso).
 ferfi(gemes_imre).
 ferfi(joszkin_ede).
 
-% Napok sorrendje
 nap_elotte(kedd, hetfo).
 nap_elotte(szerda, hetfo).
 nap_elotte(szerda, kedd).

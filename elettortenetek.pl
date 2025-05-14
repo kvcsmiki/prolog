@@ -18,34 +18,36 @@ megold(K) :-
     kotet(X14, K), szerk(X14, joszkin_ede),
     kotet(X15, K), szerk(X15, palos_kata),
     
-    % 1. Sem a hétfői, sem a Csengő című könyvet nem nő szerkesztette.
+    % 1. Sem a hétfőn boltokba került könyvet, sem a Csengő című önéletrajzot nem női szerkesztő dolgozta át.
     kotet(A1, K), nap(A1, hetfo), szerk(A1, A1SZ), ferfi(A1SZ),
     kotet(A2, K), cim(A2, csengo), szerk(A2, A2SZ), ferfi(A2SZ),
 
-    % 2. Mindkét fenti könyv olcsóbb, mint Abafi Bea könyve, amely egy nappal Joszkin Ede könyve előtt jelent meg.
+    % 2. Mind a két előbb említett mű kevesebbe kerül, mint az Abafi Bea által átszerkesztett könyv,
+    % ami egy nappal a Joszkin Ede keze munkáját dícsérő kiadvány előtt jelent meg.
     ar(A1, A1AR), ar(A2, A2AR),
     kotet(B1, K), szerk(B1, abafi_bea), nap(B1, B1N), ar(B1, B1AR),
     kotet(B2, K), szerk(B2, joszkin_ede), nap(B2, B2N),
     A1AR < B1AR, A2AR < B1AR,
     egy_nappal_elotte(B2N, B1N),
 
-    % 3. A Túl Mindenen drágább mint Dalos Dezső szerkesztése
+    % 3. A Túl Minden drágább, mint Dalos Dezső szerkesztése.
     kotet(C1,K), cim(C1,tul_mindenen), ar(C1, C1AR),
     kotet(C2,K), szerk(C2,dalos_dezso), ar(C2, C2AR), C1AR > C2AR,
 
-    % 4. A Márványfejek csütörtök óta kapható
+    % 4. A Márványfejek-et csütörtök óta lehet kapni.
     kotet(D,K), cim(D,marvanyfejek), nap(D,csutortok),
 
-    % 5. 1700 Ft-os könyv szerkesztője Pálos Kata, és előbb jelent meg, mint a Márványfejek
-    kotet(E, K), ar(E, 1700), szerk(E, palos_kata), nap(E, _),
+    % 5.  Az 1700 forintos önéletrajzot Pálos Kata öntötte végső formába: ez a mű már a Márványfejek előtt boltokban volt.
+    kotet(E, K), ar(E, 1700), szerk(E, palos_kata), nap(E, EN),
+    nap_elotte(csutortok, EN),
 
-    % 6. A szerdai könyv 1500 Ft
+    % 6. A szerdai megjelenésű könyv volt az öt közül a legolcsóbb.
     kotet(F,K), nap(F,szerda), ar(F,1500),
 
-    % 7. Dobos torta ára 2350
+    % 7. A Dobos torta ára 2350 forint.
     kotet(G,K), cim(G,dobos_torta), ar(G,2350),
 
-    % 8. Gémes Imre a Zene-bonát szerkesztette
+    % 8. Gémes Imre a rock-sztár kéziratát szerkesztette át.
     kotet(H,K), szerk(H,gemes_imre), cim(H,zene_bona).
 
 nap(k(X,_,_,_),X).
